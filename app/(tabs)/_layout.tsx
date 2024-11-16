@@ -1,11 +1,26 @@
 import { StatusBar } from "expo-status-bar";
-import { Redirect, Tabs } from "expo-router";
-
-
+import { Tabs } from "expo-router";
+import { Image, Text, View } from "react-native";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 const TabLayout = () => {
 
     // if (!loading && !isLogged) return <Redirect href="/sign-in" />;
-
+    const TabIcon = ({ icon, color, name, focused }: any) => {
+        return (
+            <View >
+                <Image
+                    source={icon}
+                    resizeMode="contain"
+                    tintColor={color}
+                />
+                <Text
+                    style={{ color: color }}
+                >
+                    {name}
+                </Text>
+            </View>
+        );
+    };
     return (
         <>
             <Tabs
@@ -13,34 +28,33 @@ const TabLayout = () => {
                     tabBarActiveTintColor: "#FFA001",
                     tabBarInactiveTintColor: "#CDCDE0",
                     tabBarShowLabel: false,
-                    tabBarStyle: {
-                        backgroundColor: "#161622",
-                        borderTopWidth: 1,
-                        borderTopColor: "#232533",
-                        height: 84,
-                    },
                 }}
             >
                 <Tabs.Screen
-                    name="home"
+                    name="dashboard"
                     options={{
-                        title: "Home",
+                        title: "Dashboard",
                         headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesome size={24} name="home" color={color} />,
                     }}
+
+
                 />
                 <Tabs.Screen
-                    name="bookmark"
+                    name="courses"
                     options={{
-                        title: "Bookmark",
+                        title: "Courses",
                         headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesome size={24} name="book" color={color} />,
                     }}
                 />
 
                 <Tabs.Screen
-                    name="create"
+                    name="timetable"
                     options={{
-                        title: "Create",
+                        title: "Time Table",
                         headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesome size={24} name="calendar" color={color} />,
                     }}
                 />
                 <Tabs.Screen
@@ -48,11 +62,14 @@ const TabLayout = () => {
                     options={{
                         title: "Profile",
                         headerShown: false,
+
+                        tabBarIcon: ({ color }) => <FontAwesome size={24} name="user" color={color} />,
+
                     }}
                 />
             </Tabs>
 
-            <StatusBar backgroundColor="#161622" style="light" />
+            <StatusBar backgroundColor="#161622" style="dark" />
         </>
     );
 };
